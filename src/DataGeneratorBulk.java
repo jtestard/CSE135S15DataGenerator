@@ -140,7 +140,7 @@ public class DataGeneratorBulk {
                 "CREATE TABLE cart_history (id SERIAL PRIMARY KEY, uid INTEGER REFERENCES users (id) NOT NULL);");
         dropCreateTable(
                 "DROP TABLE sales CASCADE;",
-                "CREATE TABLE sales (id SERIAL PRIMARY KEY,uid INTEGER REFERENCES users (id) ON DELETE CASCADE, cart_id INTEGER REFERENCES cart_history (id) NOT NULL, pid INTEGER REFERENCES products (id) ON DELETE CASCADE,quantity INTEGER NOT NULL, price INTEGER NOT NULL);");
+                "CREATE TABLE sales (id SERIAL PRIMARY KEY,uid INTEGER REFERENCES users (id) ON DELETE CASCADE, cart_id INTEGER, pid INTEGER REFERENCES products (id) ON DELETE CASCADE,quantity INTEGER NOT NULL, price INTEGER NOT NULL);");
 
     }
 
