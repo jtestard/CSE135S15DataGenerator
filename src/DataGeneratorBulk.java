@@ -26,7 +26,6 @@ import com.cedarsoftware.util.io.JsonReader;
  **/
 public class DataGeneratorBulk {
     HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
-    //int MAXBuffer = 1000000;
     private Connection conn = null;
     private Statement stmt = null;
     static private String databaseName = null;
@@ -137,9 +136,12 @@ public class DataGeneratorBulk {
         dropCreateTable(
                 "DROP TABLE products CASCADE;",
                 "CREATE TABLE products (id SERIAL PRIMARY KEY,cid INTEGER REFERENCES categories (id) ON DELETE CASCADE,name TEXT NOT NULL,SKU TEXT NOT NULL UNIQUE,price INTEGER NOT NULL);");
+        dropCreateTable("DROP TABLE cart_history CASCADE;",
+                "CREATE TABLE cart_history (id SERIAL PRIMARY KEY, uid INTEGER REFERENCES users (id) NOT NULL);");
         dropCreateTable(
                 "DROP TABLE sales CASCADE;",
-                "CREATE TABLE sales (id SERIAL PRIMARY KEY,uid INTEGER REFERENCES users (id) ON DELETE CASCADE,pid INTEGER REFERENCES products (id) ON DELETE CASCADE,quantity INTEGER NOT NULL, price INTEGER NOT NULL);");
+                "CREATE TABLE sales (id SERIAL PRIMARY KEY,uid INTEGER REFERENCES users (id) ON DELETE CASCADE, cart_id INTEGER REFERENCES cart_history (id) NOT NULL, pid INTEGER REFERENCES products (id) ON DELETE CASCADE,quantity INTEGER NOT NULL, price INTEGER NOT NULL);");
+
     }
 
     public boolean dropCreateTable(String sql, String sql2) throws SQLException {
