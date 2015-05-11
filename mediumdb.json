@@ -1,0 +1,10 @@
+{
+    "database_name" : "smalldb",
+    "user_name" : "postgres",
+    "password" : "postgres",
+    "chunks" : 10,
+    "num_users" : 50000,
+    "num_categories" : 2500,
+    "num_products" : 5000,
+    "num_sales" : 250000
+}
