@@ -77,7 +77,6 @@ public class DataGeneratorBulk {
         generateSales(salesPaths, Num_users, Num_products, Num_sales);
         long end = System.currentTimeMillis();
         System.out.println("Finish, running time:" + (end - start) + "ms");
-        Runtime.getRuntime().exec("chmod 775 *.txt");
         long start2 = System.currentTimeMillis();
         copy(usersPath, categoriesPath, productsPath, salesPaths);
         long end2 = System.currentTimeMillis();
@@ -291,7 +290,6 @@ public class DataGeneratorBulk {
         BufferedWriter out = null;
         try {
             File f = new File(path);
-            f.setReadable(true, false); // everybody can read, including postgres.
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f, false)));
             for (int i = 0; i < al.size(); i++) {
                 out.write(al.get(i));
